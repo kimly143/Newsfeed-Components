@@ -85,7 +85,14 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
-  }
+  },
+  {
+    title: 'This is what Kim did at Lamda school 2020',
+    date: 'Feb 20, 2020',
+    firstParagraph: 'I am a gummy bear.',
+    secondParagraph: 'I am another gummy bear.',
+    thirdParagraph: 'I am the last one here, I am a gummy bear'
+  },
 ];
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
@@ -112,3 +119,38 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+const createArticle = ({title, date, firstParagraph, secondParagraph, thirdParagraph}) => {
+  const article = document.createElement('div');
+  article.classList.add('article');
+
+  const h2 = document.createElement('h2');
+  h2.textContent = title;
+  article.appendChild(h2);
+
+  const d = document.createElement('p');
+  d.classList.add('date');
+  d.textContent = date;
+  article.appendChild(d);
+
+  [firstParagraph, secondParagraph, thirdParagraph].forEach(paragraph => {
+    const p = document.createElement('p');
+    p.textContent = paragraph;
+    article.appendChild(p);
+  });
+
+  const btn = document.createElement('span');
+  btn.classList.add('expandButton');
+  btn.textContent = 'Click Me'
+  btn.addEventListener('click', () => {
+    article.classList.toggle('article-open');
+  })
+  article.appendChild(btn);
+
+  return article;
+}
+
+data.forEach(item => {
+  const art = createArticle(item);
+  document.querySelector('.articles').appendChild(art);
+});
